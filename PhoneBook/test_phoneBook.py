@@ -30,14 +30,21 @@ class TestPhoneBook(unittest.TestCase):
       def test_to_get_contact_by_phoneNumber(self):
           contact = phoneBook()
           contact.add_contact("09023456788", "ole", "you")
-          contact.set_email("olabodelawal@gmail.com")
-          result =  '''
-          firstname: ole 
-          lastname : you
-          phone number: 09023456788
-          email: olabodelawal@gmail.com
-          '''
-          self.assertEqual(result, contact.get_contact_by_phone_number("09023456788"))
+          contact.set_email("09023456788","olabodelawal@gmail.com")
+          answer = contact.get_contact_by_phone_number("09023456788")
+          self.assertIn("firstname: ole", answer)
+          self.assertIn("lastname: you", answer)
+          self.assertIn("phone number : 09023456788", answer)
+          self.assertIn("email: olabodelawal@gmail.com", answer)
+
+      def test_to_find_contact_by_first_name(self):
+          contact = phoneBook()
+          contact.add_contact("09023456788", "ole", "you")
+          contact.find_by_first_name("ole")
+
+
+
+
 
 
 

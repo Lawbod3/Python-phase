@@ -5,7 +5,7 @@ from operator import contains
 class phoneBook:
     def __init__(self):
         self.phoneBook = {}
-        self.findContact = []
+        self.findContact = {}
         self.phoneNumber = ""
         self.firstName = ""
         self.lastName = ""
@@ -24,14 +24,20 @@ class phoneBook:
         self.phoneNumber = phone_number
         self.firstName = first_name
         self.lastName = last_name
-        result = (f'''
+        result =(f'''
         firstname: {self.firstName} 
         lastname : {self.lastName}
         phone number: {phone_number}
         email: {self.email}
-        ''')
+        ''').strip('\n')
         self.phoneBook[phone_number] = result
         self.counter += 1
+        for key in self.findContact.keys():
+            if first_name[0] == key:
+                self.findContact[key] = first_name + " " + last_name
+            if last_name[0] == key:
+                self.findContact[key] = first_name + " " + last_name
+
 
     def get_numbers_of_contact(self):
         return self.counter
@@ -41,13 +47,28 @@ class phoneBook:
             self.phoneBook.pop(phone_number)
 
 
-    def set_email(self, email: str):
+    def set_email(self,phone_number, email: str):
+        if phone_number not in self.phoneBook:
+            raise ValueError("Invalid phone number")
         if not isinstance(email, str):
             raise ValueError("Email must be a string")
-        if  '@' in email and email.count('@') == 1 and '.'  in email.split('@')[1]:
-            self.email = email
-        else:
+        if not ('@' in email and email.count('@') == 1)  :
             raise ValueError("Email must be a valid email address")
+        if not ('.' in email and email.count('.') == 1) :
+            raise ValueError("Email must be a valid email address")
+
+
+        result =(f'''
+        firstname: {self.firstName} 
+        lastname: {self.lastName}
+        phone number : {phone_number}
+        email: {email}
+        ''').strip('\n')
+        self.phoneBook[phone_number] = result
+
+
+
+
 
 
 
@@ -56,6 +77,19 @@ class phoneBook:
             return self.phoneBook[input_phone_number]
         else:
             raise ValueError("Invalid phone number")
+
+    def set_find_contact(self):
+        key= "abcdefghijklmnopqrstuvwxyz"
+        for number in key:
+            self.findContact[number] = []
+
+
+
+
+
+
+
+
 
 
 
