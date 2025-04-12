@@ -29,14 +29,18 @@ class phoneBook:
         lastname : {self.lastName}
         phone number: {phone_number}
         email: {self.email}
-        ''').strip('\n')
+        ''')
         self.phoneBook[phone_number] = result
         self.counter += 1
-        for key in self.findContact.keys():
-            if first_name[0] == key:
-                self.findContact[key] = first_name + " " + last_name
-            if last_name[0] == key:
-                self.findContact[key] = first_name + " " + last_name
+
+        self.set_find_contact()
+        answer = first_name + " " + last_name
+        first_name_first_letter = first_name[0].lower()
+        last_name_first_letter = last_name[0].lower()
+        if first_name_first_letter in self.findContact:
+                self.findContact[first_name_first_letter].append([first_name, last_name, phone_number])
+        if last_name_first_letter in self.findContact:
+                self.findContact[last_name_first_letter].append([first_name, last_name, phone_number])
 
 
     def get_numbers_of_contact(self):
@@ -57,19 +61,13 @@ class phoneBook:
         if not ('.' in email and email.count('.') == 1) :
             raise ValueError("Email must be a valid email address")
 
-
         result =(f'''
         firstname: {self.firstName} 
         lastname: {self.lastName}
         phone number : {phone_number}
         email: {email}
-        ''').strip('\n')
+        ''')
         self.phoneBook[phone_number] = result
-
-
-
-
-
 
 
     def get_contact_by_phone_number(self, input_phone_number: str ):
@@ -82,6 +80,28 @@ class phoneBook:
         key= "abcdefghijklmnopqrstuvwxyz"
         for number in key:
             self.findContact[number] = []
+
+    def find_by_first_name(self, first_name: str):
+        first_name_first_letter = first_name[0].lower()
+
+        match = []
+        for contact in self.findContact[first_name_first_letter]:
+             if contact[0].lower() == first_name.lower():
+                match.append(contact)
+        return match
+
+    def find_by_last_name(self, last_name: str):
+        last_name_first_letter =last_name[0].lower()
+
+        match = []
+        for contact in self.findContact[last_name_first_letter]:
+            if contact[1].lower() == last_name.lower():
+                match.append(contact)
+        return match
+
+
+
+
 
 
 

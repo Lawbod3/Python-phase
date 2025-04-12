@@ -40,7 +40,22 @@ class TestPhoneBook(unittest.TestCase):
       def test_to_find_contact_by_first_name(self):
           contact = phoneBook()
           contact.add_contact("09023456788", "ole", "you")
-          contact.find_by_first_name("ole")
+          answer = contact.find_by_first_name("ole")
+          result = ["ole", "you", "09023456788"]
+          result_two = []
+          result_two.append(result)
+          self.assertEqual(result_two, answer)
+
+      def test_to_find_contact_by_last_name(self):
+          contact = phoneBook()
+          contact.add_contact("09023456788", "ole", "you")
+          answer = contact.find_by_last_name("you")
+          result = ["ole", "you", "09023456788"]
+          result_two = []
+          result_two.append(result)
+          self.assertEqual(result_two, answer)
+
+
 
 
 
