@@ -99,7 +99,7 @@ class phoneBook:
             raise ValueError("Invalid phone number")
 
     def set_find_contact(self):
-        key= "abcdefghijklmnopqrstuvwxyz0123456789!@#/$%^&\*(-_=+)?|}]{[>.<,~`'"
+        key= "abcdefghijklmnopqrstuvwxyz0123456789!@#/\\$%^&(*-_=+)?|}]{[>.<,~`'"
         for number in key:
             self.findContact[number] = []
 
@@ -112,8 +112,13 @@ class phoneBook:
         match = []
         for contact in self.findContact[first_name_first_letter]:
              if contact[0].lower() == first_name.lower():
+                print(f"{self.phoneBook[contact[2]]}")
                 match.append(contact)
+
+             else:
+                 print("First name not found")
         return match
+
 
     def find_by_last_name(self, last_name: str):
         last_name_first_letter =last_name[0].lower()
@@ -121,8 +126,12 @@ class phoneBook:
         match = []
         for contact in self.findContact[last_name_first_letter]:
             if contact[1].lower() == last_name.lower():
+                print(f"{self.phoneBook[contact[2]]}")
                 match.append(contact)
+            else:
+                print("Last name not found")
         return match
+
 
 
 
