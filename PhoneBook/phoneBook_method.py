@@ -132,6 +132,36 @@ class phoneBook:
                 print("Last name not found")
         return match
 
+    def edit_contact(self, phone_number: str, new_number: str, first_name: str, last_name: str):
+        if phone_number not in self.phoneBook:
+            raise ValueError("phone number not found")
+        if new_number in self.phoneBook:
+            raise ValueError("phone number already exists")
+
+        if phone_number != new_number:
+            del self.phoneBook[phone_number]
+            result = (f'''
+                    firstname: {first_name} 
+                    lastname : {last_name}
+                    phone number: {new_number}
+                    email: 
+                    ''')
+            self.phoneBook[new_number] = result
+        else:
+            result = (f'''
+                    firstname: {first_name} 
+                    lastname : {last_name}
+                    phone number: {phone_number}
+                    email: 
+                    ''')
+            self.phoneBook[phone_number] = result
+
+
+
+
+
+
+
 
 
 
