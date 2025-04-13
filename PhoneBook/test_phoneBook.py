@@ -25,7 +25,7 @@ class TestPhoneBook(unittest.TestCase):
           contact = phoneBook()
           contact.add_contact("09023456788", "ole", "you")
           contact.remove_contact("09023456788")
-          self.assertEqual(1, contact.get_numbers_of_contact())
+          self.assertEqual(0, contact.get_numbers_of_contact())
 
       def test_to_get_contact_by_phoneNumber(self):
           contact = phoneBook()
