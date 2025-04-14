@@ -45,6 +45,7 @@ while not exit_app:
                       last_name = input("Enter your last name: ")
 
                   contact.add_contact(phone_number, first_name, last_name)
+                  print("Contact added successfully")
                   break
 
           case "2":
@@ -119,15 +120,6 @@ while not exit_app:
                   print("Contact edited")
                   break
 
-
           case "7":
               exit_app = False
               break
-
-
-
-
-
-
-
-

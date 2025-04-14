@@ -135,8 +135,6 @@ class phoneBook:
     def edit_contact(self, phone_number: str, new_number: str, first_name: str, last_name: str):
         if phone_number not in self.phoneBook:
             raise ValueError("phone number not found")
-        if new_number in self.phoneBook:
-            raise ValueError("phone number already exists")
 
         if phone_number != new_number:
             del self.phoneBook[phone_number]
@@ -147,6 +145,16 @@ class phoneBook:
                     email: 
                     ''')
             self.phoneBook[new_number] = result
+            first_name_first_letter = first_name[0].lower()
+            last_name_first_letter = last_name[0].lower()
+            self.findContact[first_name_first_letter] = [contact for contact in
+                                                         self.findContact[first_name_first_letter] if
+                                                         contact[2] != phone_number]
+            self.findContact[last_name_first_letter] = [contact for contact in self.findContact[last_name_first_letter]
+                                                        if contact[2] != phone_number]
+            self.findContact[first_name_first_letter].append([first_name, last_name, new_number])
+
+
         else:
             result = (f'''
                     firstname: {first_name} 
@@ -155,6 +163,15 @@ class phoneBook:
                     email: 
                     ''')
             self.phoneBook[phone_number] = result
+            first_name_first_letter = first_name[0].lower()
+            last_name_first_letter = last_name[0].lower()
+            self.findContact[first_name_first_letter] = [contact for contact in
+                                                         self.findContact[first_name_first_letter] if
+                                                         contact[2] != phone_number]
+            self.findContact[last_name_first_letter] = [contact for contact in self.findContact[last_name_first_letter]
+                                                        if contact[2] != phone_number]
+            self.findContact[first_name_first_letter].append([first_name, last_name, new_number])
+            self.findContact[last_name_first_letter].append([first_name, last_name, new_number])
 
 
 
